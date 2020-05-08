@@ -55,3 +55,4 @@ export default class PlantList extends Component {
     );
   }
 }
+
