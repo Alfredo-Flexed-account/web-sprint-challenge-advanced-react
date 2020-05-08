@@ -1,48 +1,29 @@
 // write your custom hook here to control your checkout form
-const UseForm = () => {
-    const [firstName, setFirstName]= useInput("");
-    const [lastName, setLastName]= useInput("");
-    const [address, setAddress]= useInput("");
-    const [city, setCity]= useInput("");
-    const [citystate, setCityState]= useInput("");
-    const [zip, setZip]= useInput("");
-  
-    const resetValues = e => {
+import {useState} from 'react';
+
+const useForm = () => {
+    const [showSuccessMessage, setShowSuccessMessage] = useState(false);
+    const initialValue = {
+        firstName: "",
+        lastName: "",
+        address: "",
+        city: "",
+        state: "",
+        zip: "",
+    };
+
+    const [values, setValues] = useState(initialValue); 
+
+    const handleSubmit = (e) => {
         e.preventDefault();
-        setFirstName("");
-        setLastName("");
-        setAddress("");
-        setCity("");
-        setCityState("");
-        setZip("");
+        setShowSuccessMessage(true);
+    };
 
-      };
+    const handleChanges = (e) => {
+        setValues({ ...values, [e.target.name]: e.target.value });
+    };
 
-      return (
-          <div>
-        <form onSubmit={resetValues}/>
-          <input
-            className="username-text"
-            id="username"
-            name="username"
-            onChange={e => handleUsername(e.target.value)}
-            placeholder="Username"
-            type="text"
-            value={username}
-           />
-           </div>
-      )
-    // = useState([{
-    // firstName: "",
-    // lastName: "",
-    // address: "",
-    // city: "",
-    // state: "",
-    // zip: "",
-    // }]);
-    
-
-   
+    return [handleChanges, handleSubmit, values, showSuccessMessage]
 }
 
-export default UseForm;
+export default useForm 
