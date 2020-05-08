@@ -3,8 +3,8 @@ import axios from "axios";
 
 export default class PlantList extends Component {
   // add state with a property called "plants" - initialize as an empty array
-  constructor(){
-    super();
+  constructor(props){
+    super(props);
     this.state = {
       plants: []
     }
@@ -14,7 +14,7 @@ export default class PlantList extends Component {
     axios.get('http://localhost:3333/plants')
     .then(res => {
       this.setState ({
-        plants: this.state.plants
+        plants: res.data.plantsData
       })
       console.log('plants data', res.data)
     })
